@@ -6,8 +6,8 @@ exports.getAllBlogsController = async(req,res)=>{
     try{
         const blogs = await blogModel.find({}).populate("user");
 
-        if(!blogs){
-            return res.status(200).send({
+        if(blogs.length === 0){
+            return res.status(404).send({
                 success:false,
                 message:"No blogs found"
              })
@@ -87,6 +87,13 @@ exports.updateBlogController = async(req,res)=>{
 
         const blog = await blogModel.findByIdAndUpdate(id,{title,description,image},{new:true})
 
+        if(!blog){
+            return res.status(404).send({
+                success:false,
+                message:"Blog not found"
+            })
+        }
+
         return res.status(200).send({
             success:true,
             message:"Blog updated successfully",
@@ -95,7 +102,7 @@ exports.updateBlogController = async(req,res)=>{
 
     }catch(error){
         console.log(error)
-        return res.status(400).send({
+        return res.status(500).send({
             success:false,
             message:"error while updating blog",
             error
@@ -123,7 +130,7 @@ exports.getBlogByIdController= async(req,res)=>{
 
     }catch(error){
         console.log(error)
-        return res.status(400).send({
+        return res.status(500).send({
             success:false,
             message:"error while getting single blog",
             error
@@ -145,7 +152,7 @@ exports.deleteBlogController = async (req, res) => {
         }
 
         if (!blog.user) {
-            return res.status(404).send({
+            return res.status(500).send({
                 success: false,
                 message: "User not found for this blog"
             });
@@ -161,7 +168,7 @@ exports.deleteBlogController = async (req, res) => {
         });
 
     } catch (error) {
-        return res.status(400).send({
+        return res.status(500).send({
             success: false,
             message: "error while deleting blog",
             error
@@ -177,7 +184,7 @@ exports.userBlogController=async(req,res)=>{
         })
 
         if(!userBlog){
-            return res.status(404).send({
+            return res.status(500).send({
                 success:false,
                 message:"Blogs not found with this id"
             
@@ -191,7 +198,7 @@ exports.userBlogController=async(req,res)=>{
 
     }catch(error){
         console.log(error)
-        return res.status(400).send({
+        return res.status(500).send({
             success:false,
             message:"error while getting user blog",
             error

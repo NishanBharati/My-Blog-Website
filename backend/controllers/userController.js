@@ -15,7 +15,7 @@ exports.registerController = async(req,res) =>{
 
         const existingUser = await userModel.findOne({email})
         if(existingUser){
-            return res.status(401).send({
+            return res.status(409).send({
                 success:false,
                 message:'User already exists'
             })
@@ -90,7 +90,7 @@ exports.loginController = async(req,res)=>{
 
         const user = await userModel.findOne({email})
         if(!user){
-            return res.status(200).send({
+            return res.status(404).send({
                 success:false,
                 message:'Email is not registered'
 
@@ -99,7 +99,7 @@ exports.loginController = async(req,res)=>{
 
     const isMatch = await becrypt.compare(password,user.password)
     if(!isMatch){
-        return res.status(200).send({
+        return res.status(401).send({
             success:false,
             message:'Invalid password'
         })
