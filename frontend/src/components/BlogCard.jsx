@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState } from "react";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
@@ -8,7 +9,7 @@ import Typography from "@mui/material/Typography";
 import { red } from "@mui/material/colors";
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { Box, IconButton } from "@mui/material";
+import { Box, IconButton, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import axios from '../utils/axiosConfig';
 
@@ -23,6 +24,9 @@ export default function BlogCard({
   isUser,
 }) {
   const navigate = useNavigate();
+  const [expanded, setExpanded] = useState(false);
+  const MAX_LENGTH = 150;
+
   const handleEdit = () => {
     navigate(`/blog-details/${id}`);
   };
@@ -50,6 +54,9 @@ export default function BlogCard({
         ":hover:": {
           boxShadow: "10px 10px 20px #ccc",
         },
+        display: "flex",
+        flexDirection: "column",
+        minHeight: "400px",
       }}
     >
       {isUser && (
@@ -79,9 +86,20 @@ export default function BlogCard({
         <Typography variant="h6" sx={{ fontWeight: "bold", mb: 1 }}>
           Title : {title}
         </Typography>
-        <Typography variant="body1" sx={{ color: "text.secondary" }}>
-          Description : {description}
+        <Typography variant="body1" sx={{ color: "text.secondary", mb: 1 }}>
+          Description : {expanded || description.length <= MAX_LENGTH
+            ? description
+            : `${description.substring(0, MAX_LENGTH)}...`}
         </Typography>
+        {description.length > MAX_LENGTH && (
+          <Button
+            size="small"
+            onClick={() => setExpanded(!expanded)}
+            sx={{ textTransform: "none", p: 0, minWidth: 0 }}
+          >
+            {expanded ? "Read Less" : "Read More"}
+          </Button>
+        )}
       </CardContent>
     </Card>
   );

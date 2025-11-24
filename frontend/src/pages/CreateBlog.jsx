@@ -45,7 +45,14 @@ const id = localStorage.getItem("userId");
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
+      <Box
+        sx={{
+          minHeight: '100vh',
+          padding: '20px',
+          background: 'linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)',
+        }}
+      >
+        <form onSubmit={handleSubmit}>
         <Box
           width={"45%"}
           border={3}
@@ -56,6 +63,7 @@ const id = localStorage.getItem("userId");
           display="flex"
           flexDirection={"column"}
           marginTop="30px"
+          sx={{ backgroundColor: 'white' }}
         >
           <Typography
             variant="h2"
@@ -109,6 +117,7 @@ const id = localStorage.getItem("userId");
           <Button type="submit" color ="primary" variant="contained">Submit</Button>
         </Box>
       </form>
+      </Box>
     </>
   );
 };

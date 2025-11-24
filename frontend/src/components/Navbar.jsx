@@ -5,7 +5,10 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { authActions } from "../redux/store";
-import toast from 'react-hot-toast'
+import toast from 'react-hot-toast';
+import LogoutIcon from '@mui/icons-material/Logout';
+import LoginIcon from '@mui/icons-material/Login';
+import HowToRegIcon from '@mui/icons-material/HowToReg';
 
 
 
@@ -33,7 +36,7 @@ const Navbar = () => {
     <>
       <AppBar position="sticky">
         <Toolbar>
-          <Typography variant="h3">My Blog Website</Typography>
+          <Typography variant="h3">NB Blogs</Typography>
 
           {isLogin && (
             <Box display={'flex'} marginLeft={'auto'} marginRight={'auto'}>
@@ -49,16 +52,30 @@ const Navbar = () => {
           <Box display={"flex"} marginLeft="auto">
             {!isLogin && (
               <>
-                <Button sx={{ margin: 1, color: "white" }} component={Link} to="/login">
+                <Button 
+                  sx={{ margin: 1, color: "white" }} 
+                  component={Link} 
+                  to="/login"
+                  startIcon={<LoginIcon />}
+                >
                   Login
                 </Button>
-                <Button sx={{ margin: 1, color: "white" }} component={Link} to="/register">
+                <Button 
+                  sx={{ margin: 1, color: "white" }} 
+                  component={Link} 
+                  to="/register"
+                  startIcon={<HowToRegIcon />}
+                >
                   Register
                 </Button>
               </>
             )}
             {isLogin && (
-              <Button onClick={handleLogout} sx={{ margin: 1, color: "white" }}>
+              <Button 
+                onClick={handleLogout} 
+                sx={{ margin: 1, color: "white" }}
+                startIcon={<LogoutIcon />}
+              >
                 Logout
               </Button>
             )}

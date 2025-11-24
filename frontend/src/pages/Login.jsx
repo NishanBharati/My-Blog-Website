@@ -47,7 +47,16 @@ const Login = () => {
 
   return (
     <>
-    <form onSubmit={handleSubmit}>
+      <Box
+        sx={{
+          minHeight: '100vh',
+          padding: '20px',
+          background: 'linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)',
+          display: 'flex',
+          alignItems: 'center',
+        }}
+      >
+        <form onSubmit={handleSubmit} style={{ width: '100%' }}>
       <Box
         maxWidth={450}
         display="flex"
@@ -59,6 +68,7 @@ const Login = () => {
         boxShadow={"10px 10px 20px #ccc"}
         padding={3}
         borderRadius={5}
+        sx={{ backgroundColor: 'white' }}
       >
 
         <Typography variant="h4" sx={{textTransform:"uppercase"}} padding={3} textAlign="center">Login</Typography>
@@ -71,6 +81,7 @@ const Login = () => {
         <Button onClick={()=>navigate("/register")} sx={{borderRadius:3,marginTop:3}} color="primary">Not a user ? Please Register</Button>
       </Box>
       </form>
+      </Box>
     </>
   );
 };

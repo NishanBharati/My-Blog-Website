@@ -44,7 +44,16 @@ const Register = () => {
 
   return (
     <>
-    <form onSubmit={handleSubmit}>
+      <Box
+        sx={{
+          minHeight: '100vh',
+          padding: '20px',
+          background: 'linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)',
+          display: 'flex',
+          alignItems: 'center',
+        }}
+      >
+        <form onSubmit={handleSubmit} style={{ width: '100%' }}>
       <Box
         maxWidth={450}
         display="flex"
@@ -56,6 +65,7 @@ const Register = () => {
         boxShadow={"10px 10px 20px #ccc"}
         padding={3}
         borderRadius={5}
+        sx={{ backgroundColor: 'white' }}
       >
 
         <Typography variant="h4" sx={{textTransform:"uppercase"}} padding={3} textAlign="center">Register</Typography>
@@ -69,6 +79,7 @@ const Register = () => {
         <Button onClick={()=>navigate("/login")} sx={{borderRadius:3,marginTop:3}} color="primary">Already Registered ? Please Login</Button>
       </Box>
       </form>
+      </Box>
     </>
   );
 };
